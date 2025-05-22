@@ -1,0 +1,59 @@
+.user-menu {
+  position: absolute;
+  /* display: flex; */
+  /* justify-content: flex-end; */
+  margin: 15px 20px;
+  top: 0;
+  right: 0;
+}
+
+.user-icon {
+  width: 40px;
+  height: 40px;
+  background-color: #444;
+  color: #e0e0e0;
+  font-weight: bold;
+  font-size: 1.5rem;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.fa-circle-user {
+  background: transparent;
+  font-size: 2rem;
+}
+
+.dropdown {
+  position: absolute;
+  padding: 5px;
+  top: 50px;
+  right: 0;
+  background: #e0e0e0;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  min-width: 120px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  z-index: 100;
+}
+
+.dropdown-item {
+  padding: 10px;
+  font-size: 1.2rem;
+  background: transparent;
+  cursor: pointer;
+  border-radius: 8px;
+
+  color: #000;
+  text-align: left;
+}
+
+.dropdown-item:hover {
+  background-color: #b8b8b8;
+}
+
+.hi-user {
+  font-weight: bold;
+}

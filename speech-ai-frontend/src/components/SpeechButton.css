@@ -1,0 +1,35 @@
+/* Speech button container */
+.speech-button {
+  background-color: #0074e0; /* Default blue */
+  color: white;
+  border: none;
+  border-radius: 50%; /* Circular button */
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px; /* Icon size */
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+/* Hover effect */
+.speech-button:hover {
+  background-color: #005fb7; /* Darker blue */
+  transform: scale(1.1); /* Slight zoom effect */
+}
+
+/* Active (click) effect */
+.speech-button:active {
+  transform: scale(0.95); /* Click shrink effect */
+}
+
+/* Recording (active) state */
+.speech-button.active {
+  background-color: #e74c3c; /* Red for active recording */
+}
+
+button i {
+  background: transparent;
+}

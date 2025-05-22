@@ -1,0 +1,79 @@
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom"; // if you use react-router for navigation
+import axios from "axios";
+import BackButton from "./BackButton";
+
+export default function Signup() {
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+  const navigate = useNavigate();
+
+  const handleSignup = async (e) => {
+    e.preventDefault();
+    setError("");
+
+    try {
+      const res = await axios.post("http://localhost:5000/api/auth/signup", {
+        name,
+        email,
+        password,
+      });
+
+      // Save token from backend response
+      localStorage.setItem("chatBotToken", res.data.token);
+      localStorage.setItem("chatBotUser", JSON.stringify(res.data.user));
+
+      // Redirect user after successful signup
+      navigate("/");
+    } catch (err) {
+      setError(err.response?.data?.error || "Signup failed. Try again.");
+    }
+  };
+
+  return (
+    <div className="signup-container">
+      <BackButton />
+
+      <h2>Create Account</h2>
+      <form onSubmit={handleSignup}>
+        <input
+          className="signup-input"
+          type="text"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+          required
+          autoComplete="name"
+          placeholder="Name"
+        />
+
+        <input
+          className="signup-input"
+          type="email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          required
+          autoComplete="email"
+          placeholder="Email"
+        />
+
+        <input
+          className="signup-input"
+          type="password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          required
+          autoComplete="new-password"
+          placeholder="Password"
+        />
+
+        <button type="submit" className="signup-button">
+          Sign Up
+        </button>
+      </form>
+
+      {error && <p className="error-msg">{error}</p>}
+    </div>
+  );
+}

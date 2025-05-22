@@ -1,0 +1,12 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,100..700;1,100..700&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap");
+* {
+  margin: 0;
+  padding: 0;
+  font-family: "Roboto", sans-serif; /* Main font */
+  background-color: #121212; /* Dark background */
+  color: #e0e0e0; /* Light gray text */
+  font-optical-sizing: auto; /* Enables optical sizing */
+  font-weight: 400; /* Normal weight */
+  font-style: normal; /* Standard style */
+  font-variation-settings: "wdth" 100; /* Width settings */
+}

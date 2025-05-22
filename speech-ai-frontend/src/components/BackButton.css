@@ -1,0 +1,36 @@
+.back-button {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  top: 20px;
+  left: 20px;
+  width: 2rem;
+  height: 2rem;
+  padding: 3px;
+  border: 2px solid transparent;
+
+  border-radius: 50%;
+  cursor: pointer;
+  background: transparent;
+  transition: border 0.3s ease;
+}
+
+.back-button:hover {
+  border: 2px solid #e0e0e0;
+}
+
+.fa-arrow-left {
+  background: transparent;
+  border: none;
+  color: #e0e0e0;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+@media (max-width: 590px) {
+  .back-button {
+    top: 15px;
+    left: 15px;
+  }
+}

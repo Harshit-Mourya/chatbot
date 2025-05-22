@@ -1,0 +1,19 @@
+.App {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.ChatBot {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.Heading {
+  text-align: center;
+  padding: 20px 0;
+}
