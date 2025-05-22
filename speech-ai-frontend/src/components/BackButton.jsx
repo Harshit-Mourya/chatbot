@@ -7,7 +7,7 @@ export default function BackButton() {
 
   return (
     <div className="back-button" onClick={() => navigate(-1)}>
-      <i class="fa-solid fa-arrow-left"></i>
+      <i className="fa-solid fa-arrow-left"></i>
     </div>
   );
 }

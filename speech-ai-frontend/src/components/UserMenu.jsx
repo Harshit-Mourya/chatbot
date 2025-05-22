@@ -71,7 +71,7 @@ const UserMenu = () => {
         {isLoggedIn ? (
           user?.name?.[0]?.toUpperCase()
         ) : (
-          <i class="fa-solid fa-circle-user"></i>
+          <i className="fa-solid fa-circle-user"></i>
         )}
       </div>
 

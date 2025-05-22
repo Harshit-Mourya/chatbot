@@ -10,6 +10,7 @@ export default function Login() {
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
   const { login } = useAuth();
+  const [loginError, setLoginError] = useState("");
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -27,8 +28,14 @@ export default function Login() {
 
       navigate("/"); // Redirect to chatbot
     } catch (err) {
-      alert("Login failed");
-      console.error(err);
+      if (!err.response) {
+        alert("Network error. Please check your connection.");
+      } else {
+        const msg =
+          err.response?.data?.error || "Login failed. Please try again.";
+        setLoginError(msg);
+        console.error(err);
+      }
     }
   };
 
@@ -54,6 +61,8 @@ export default function Login() {
           onChange={(e) => setPassword(e.target.value)}
           required
         />
+        {loginError && <p className="login-error">*&nbsp;{loginError}</p>}
+
         <button type="submit" className="login-button">
           Login
         </button>

@@ -1,0 +1,64 @@
+.session-expired-popup {
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #1e1e1e;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  padding: 16px 24px;
+  border: 1px solid #e0e0e0;
+  text-align: center;
+  border-radius: 8px;
+  max-width: 320px;
+  z-index: 9999;
+  user-select: none;
+}
+
+.session-expired-popup p {
+  background: transparent;
+  margin: 0 0 12px 0;
+  font-size: 1.2rem;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #e0e0e0;
+}
+
+.session-expired-popup i.fa-triangle-exclamation {
+  color: #ffc400;
+  font-size: 1.5rem;
+  background: transparent;
+}
+
+.session-expired-popup .clickable {
+  color: #0074e0;
+  cursor: pointer;
+  outline: none;
+  background: transparent;
+
+  user-select: text;
+}
+
+.session-expired-popup .clickable:hover,
+.session-expired-popup .clickable:focus {
+  color: #007bff;
+  text-decoration: underline;
+}
+
+.session-expired-popup p:last-child {
+  margin-bottom: 0;
+}
+
+.session-expired-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.6); /* semi-transparent dark */
+  backdrop-filter: blur(4px); /* optional: add blur effect */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 999; /* high z-index to cover everything */
+}

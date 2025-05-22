@@ -1,69 +1,56 @@
 import { useEffect, useState, useContext } from "react";
 import { speechToText } from "../context/SpeechToTextContext";
-import axios from "axios";
 import InputBox from "./InputBox";
 import UserMenu from "./UserMenu";
 import ChatWindow from "./ChatWindow";
-import { useChat } from "../context/ChatContext";
+import { useAuth } from "../context/AuthContext";
 import "../App.css";
+import SessionExpiredPopup from "./SessionExpiredPopup.jsx";
 
 export default function ChatBot() {
   const { transcription, setTranscription } = speechToText();
-  const [message, setMessage] = useState("");
   const [userInput, setUserInput] = useState("");
-
-  const { messages, sendToAI, loading, chatEndRef, response } = useChat();
+  const { isLoggedIn, logout } = useAuth();
+  const [showSessionExpired, setShowSessionExpired] = useState(false);
 
   useEffect(() => {
     setUserInput(transcription);
   }, [transcription]);
 
-  //  Function to send message
-  const handleSendMessage = () => {
-    if (!userInput.trim()) return;
-    sendToAI(userInput); // Send message to AI
-    setUserInput(""); // Clear input field
-  };
-
-  // Allow "Enter" key to send message
-  const handleKeyPress = (e) => {
-    if (e.key === "Enter") handleSendMessage();
-  };
-
   useEffect(() => {
-    axios
-      .get("http://localhost:5000/")
-      .then((res) => setMessage(res.data))
-      .catch((err) => console.error(err));
-  }, []);
+    // Check if session expired flag is set in sessionStorage
+    if (sessionStorage.getItem("sessionExpired") === "true") {
+      setShowSessionExpired(true);
+      sessionStorage.removeItem("sessionExpired"); // clean up
+      logout(); // ensure user is logged out
+    }
+  }, [logout]);
+
+  const handleLogin = () => {
+    setShowSessionExpired(false);
+    window.location.href = "/login";
+  };
+
+  const handleContinue = () => {
+    setShowSessionExpired(false);
+    // Let user continue without login, e.g., just close popup and let them use guest mode
+  };
 
   return (
     <div className="ChatBot">
       <h1 className="Heading">AI Chatbot</h1>
-      {/* <p>{message}</p> */}
-      {/* <div>
-        <input
-          type="text"
-          placeholder="Type a message..."
-          value={userInput}
-          onChange={(e) => setUserInput(e.target.value)}
-          onKeyDown={handleKeyPress} // Allow Enter key
+      {showSessionExpired && (
+        <SessionExpiredPopup
+          onLogin={handleLogin}
+          onContinue={handleContinue}
         />
-        <button onClick={handleSendMessage}>Send</button>
-        <SpeechButton />
-      </div> */}
+      )}
+
+      {/* <SessionExpiredPopup onLogin={handleLogin} onContinue={handleContinue} /> */}
+
       <UserMenu />
       <ChatWindow />
       <InputBox />
-      {/* <p>
-        <strong>Transcribed Text:</strong> {transcription}
-      </p>
-      <p>
-        <strong>Response:</strong> {response}
-      </p> */}
-      {/* <button onClick={() => speakResponse(response)} disabled={isSpeaking}>
-        {isSpeaking ? "Speaking..." : "🔊 Read Aloud"}
-      </button> */}
     </div>
   );
 }

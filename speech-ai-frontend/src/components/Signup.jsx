@@ -7,12 +7,12 @@ export default function Signup() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
   const navigate = useNavigate();
+  const [signupError, setSignupError] = useState("");
 
   const handleSignup = async (e) => {
     e.preventDefault();
-    setError("");
+    setSignupError("");
 
     try {
       const res = await axios.post("http://localhost:5000/api/auth/signup", {
@@ -23,12 +23,13 @@ export default function Signup() {
 
       // Save token from backend response
       localStorage.setItem("chatBotToken", res.data.token);
-      localStorage.setItem("chatBotUser", JSON.stringify(res.data.user));
+      login(res.data.user, res.data.token);
 
       // Redirect user after successful signup
       navigate("/");
     } catch (err) {
-      setError(err.response?.data?.error || "Signup failed. Try again.");
+      setSignupError(err.response?.data?.error || "Signup failed! Try again.");
+      console.error("Signup error:", err);
     }
   };
 
@@ -67,13 +68,12 @@ export default function Signup() {
           autoComplete="new-password"
           placeholder="Password"
         />
+        {signupError && <p className="signup-error">*&nbsp;{signupError}</p>}
 
         <button type="submit" className="signup-button">
           Sign Up
         </button>
       </form>
-
-      {error && <p className="error-msg">{error}</p>}
     </div>
   );
 }

@@ -23,9 +23,9 @@ export const AuthProvider = ({ children }) => {
           setIsLoggedIn(true);
         })
         .catch((err) => {
-          console.error("Auth check failed", err);
-          setIsLoggedIn(false);
-          setUser(null);
+          console.error("Auth check failed:", err);
+          sessionStorage.setItem("sessionExpired", "true");
+          logout();
         })
         .finally(() => {
           setIsAuthLoading(false); // Always update this
@@ -51,7 +51,7 @@ export const AuthProvider = ({ children }) => {
 
   const logout = () => {
     localStorage.removeItem("chatBotToken");
-    localStorage.removeItem("chatMessages");
+    // localStorage.removeItem("chatMessages");
     setIsLoggedIn(false);
     setUser(null);
     window.location.reload();

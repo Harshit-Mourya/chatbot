@@ -17,7 +17,7 @@ router.post("/", optionalAuth, async (req, res) => {
   console.log(message);
   console.log("userid: ", userId);
   if (!message) {
-    return res.status(400).json({ error: "Message is required." });
+    return res.status(400).json({ error: "Message is required!" });
   }
 
   try {
@@ -41,7 +41,7 @@ router.post("/", optionalAuth, async (req, res) => {
 
     // Send the AI response back to the client
     const aiResponse =
-      response.data?.generations?.[0]?.text?.trim() || "No response from AI";
+      response.data?.generations?.[0]?.text?.trim() || "No response from AI!";
     // console.log("AI response : ", aiResponse);
 
     // Save to DB only if logged in

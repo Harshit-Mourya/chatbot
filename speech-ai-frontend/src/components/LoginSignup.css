@@ -92,3 +92,12 @@
     font-size: 2rem;
   }
 }
+
+.login-error,
+.signup-error {
+  color: red;
+  margin-bottom: 2rem;
+  font-size: 0.8rem;
+  background: transparent;
+  /* text-align: left; */
+}
