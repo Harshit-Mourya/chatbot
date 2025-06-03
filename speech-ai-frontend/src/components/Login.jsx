@@ -11,13 +11,14 @@ export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
-  const { login } = useAuth();
+  const { login, setIsAuthLoading } = useAuth();
   const [loginError, setLoginError] = useState("");
 
   const handleLogin = async (e) => {
     e.preventDefault();
 
     try {
+      setIsAuthLoading(true);
       const res = await axios.post(`${BASE_URL}/auth/login`, {
         email,
         password,
@@ -27,7 +28,7 @@ export default function Login() {
       // localStorage.setItem("chatBotUser", JSON.stringify(res.data.user));
 
       login(res.data.user, res.data.token);
-
+      setIsAuthLoading(false);
       navigate("/"); // Redirect to chatbot
     } catch (err) {
       if (!err.response) {
