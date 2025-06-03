@@ -29,7 +29,7 @@ export default function Login() {
 
       login(res.data.user, res.data.token);
       navigate("/"); // Redirect to chatbot
-      // setIsAuthLoading(false);
+      setIsAuthLoading(false);
     } catch (err) {
       if (!err.response) {
         alert("Network error. Please check your connection.");
