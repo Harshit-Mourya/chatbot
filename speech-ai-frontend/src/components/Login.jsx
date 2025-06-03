@@ -37,6 +37,8 @@ export default function Login() {
         const msg =
           err.response?.data?.error || "Login failed. Please try again.";
         setLoginError(msg);
+        setIsAuthLoading(false);
+
         console.error(err);
       }
     }

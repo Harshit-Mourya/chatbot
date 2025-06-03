@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom"; // if you use react-router for navigation
 import axios from "axios";
 import BackButton from "./BackButton";
+import { useAuth } from "../context/AuthContext";
 
 const BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
@@ -11,6 +12,7 @@ export default function Signup() {
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
   const [signupError, setSignupError] = useState("");
+  const { login, setIsAuthLoading } = useAuth();
 
   const handleSignup = async (e) => {
     e.preventDefault();
