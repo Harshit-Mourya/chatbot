@@ -10,12 +10,16 @@ import SessionExpiredPopup from "./SessionExpiredPopup.jsx";
 export default function ChatBot() {
   const { transcription, setTranscription } = speechToText();
   const [userInput, setUserInput] = useState("");
-  const { isLoggedIn, logout } = useAuth();
+  const { isLoggedIn, logout, setIsAuthLoading } = useAuth();
   const [showSessionExpired, setShowSessionExpired] = useState(false);
 
   useEffect(() => {
     setUserInput(transcription);
   }, [transcription]);
+
+  useEffect(() => {
+    setIsAuthLoading(false);
+  });
 
   useEffect(() => {
     // Check if session expired flag is set in sessionStorage
