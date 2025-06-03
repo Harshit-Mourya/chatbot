@@ -22,14 +22,15 @@ export const ChatProvider = ({ children }) => {
   const chatEndRef = useRef(null);
   const [messages, setMessages] = useState(() => {
     const saved = localStorage.getItem("chatMessages");
-    // console.log(saved);
     return saved ? JSON.parse(saved) : [];
   });
+  const [messagesLoading, setMessagesLoading] = useState(true);
 
   useEffect(() => {
     if (isAuthLoading) return;
 
     const loadMessages = async () => {
+      setMessagesLoading(true);
       const token = localStorage.getItem("chatBotToken");
 
       if (token) {
@@ -60,10 +61,11 @@ export const ChatProvider = ({ children }) => {
           setMessages([]);
         }
       }
+      setMessagesLoading(false);
     };
 
     loadMessages();
-  }, [isAuthLoading, setMessages]);
+  }, [isAuthLoading]);
 
   //  Auto-scroll chat to the latest message
   useEffect(() => {
@@ -142,6 +144,7 @@ export const ChatProvider = ({ children }) => {
         chatEndRef,
         response,
         setResponse,
+        messagesLoading,
       }}
     >
       {children}

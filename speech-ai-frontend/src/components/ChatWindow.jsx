@@ -7,7 +7,7 @@ import "./ChatWindow.css";
 const BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
 const ChatWindow = () => {
-  const { messages, setMessages } = useChat();
+  const { messages, setMessages, messagesLoading } = useChat();
   // const [userName, setUserName] = useState("");
   const { isLoggedIn, user, isAuthLoading } = useAuth();
   const chatEndRef = useRef(null);
@@ -67,7 +67,7 @@ const ChatWindow = () => {
 
   return (
     <div className="chat-window">
-      {isAuthLoading ? (
+      {isAuthLoading || messagesLoading ? (
         <p className="chat-placeholder">Loading...</p> // wait for auth check
       ) : messages.length === 0 ? (
         <p className="chat-placeholder">
