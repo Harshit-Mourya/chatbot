@@ -25,7 +25,45 @@ export const ChatProvider = ({ children }) => {
     // console.log(saved);
     return saved ? JSON.parse(saved) : [];
   });
-  // const [messages, setMessages] = useState([]);
+
+  useEffect(() => {
+    if (isAuthLoading) return;
+
+    const loadMessages = async () => {
+      const token = localStorage.getItem("chatBotToken");
+
+      if (token) {
+        // Logged-in user: fetch from DB
+        try {
+          const res = await fetch(`${BASE_URL}/chat/history`, {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          });
+
+          if (!res.ok) throw new Error(`Server error: ${res.status}`);
+          const data = await res.json();
+          setMessages(data); // Set messages from DB
+        } catch (err) {
+          console.error("Error loading chats from server:", err);
+          alert("Failed to load your chats. Try again later.");
+        }
+      } else {
+        // Guest: load from localStorage
+        try {
+          const guestChats = JSON.parse(
+            localStorage.getItem("chatMessages") || "[]"
+          );
+          setMessages(guestChats);
+        } catch (e) {
+          console.error("Failed to load guest messages:", e);
+          setMessages([]);
+        }
+      }
+    };
+
+    loadMessages();
+  }, [isAuthLoading, setMessages]);
 
   //  Auto-scroll chat to the latest message
   useEffect(() => {
