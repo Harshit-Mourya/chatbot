@@ -20,12 +20,12 @@ export const ChatProvider = ({ children }) => {
   // const [messages, setMessages] = useState([]);
   const [loading, setLoading] = useState(false);
   const chatEndRef = useRef(null);
-  // const [messages, setMessages] = useState(() => {
-  //   const saved = localStorage.getItem("chatMessages");
-  //   // console.log(saved);
-  //   return saved ? JSON.parse(saved) : [];
-  // });
-  const [messages, setMessages] = useState([]);
+  const [messages, setMessages] = useState(() => {
+    const saved = localStorage.getItem("chatMessages");
+    // console.log(saved);
+    return saved ? JSON.parse(saved) : [];
+  });
+  // const [messages, setMessages] = useState([]);
 
   //  Auto-scroll chat to the latest message
   useEffect(() => {
