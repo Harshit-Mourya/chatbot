@@ -3,6 +3,7 @@ import React, { useState, useEffect, useRef, useContext } from "react";
 import { useChat } from "../context/ChatContext";
 import { useAuth } from "../context/AuthContext";
 import "./ChatWindow.css";
+import Loader from "./Loader";
 
 const BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
@@ -68,7 +69,8 @@ const ChatWindow = () => {
   return (
     <div className="chat-window">
       {isAuthLoading || messagesLoading ? (
-        <p className="chat-placeholder">Loading...</p> // wait for auth check
+        // <p className="chat-placeholder">Loading...</p>
+        <Loader />
       ) : messages.length === 0 ? (
         <p className="chat-placeholder">
           Hey {isLoggedIn ? user.name : "there"}, how can I assist you today?
