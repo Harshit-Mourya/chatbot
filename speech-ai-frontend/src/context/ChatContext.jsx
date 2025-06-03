@@ -15,16 +15,17 @@ const ChatContext = createContext();
 
 export const ChatProvider = ({ children }) => {
   const [response, setResponse] = useState("");
-  const { isLoggedIn } = useAuth();
+  const { isLoggedIn, isAuthLoading, user } = useAuth();
 
   // const [messages, setMessages] = useState([]);
   const [loading, setLoading] = useState(false);
   const chatEndRef = useRef(null);
-  const [messages, setMessages] = useState(() => {
-    const saved = localStorage.getItem("chatMessages");
-    // console.log(saved);
-    return saved ? JSON.parse(saved) : [];
-  });
+  // const [messages, setMessages] = useState(() => {
+  //   const saved = localStorage.getItem("chatMessages");
+  //   // console.log(saved);
+  //   return saved ? JSON.parse(saved) : [];
+  // });
+  const [messages, setMessages] = useState([]);
 
   //  Auto-scroll chat to the latest message
   useEffect(() => {
