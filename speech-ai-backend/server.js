@@ -7,16 +7,31 @@ const app = express();
 
 // Define allowed origins
 const allowedOrigins = [
-  "https://aichatbot03.netlify.app/",
+  "https://aichatbot03.netlify.app",
   "http://localhost:5173",
   "https://hoppscotch.io",
 ];
 
+// const corsOptions = {
+//   origin: allowedOrigins,
+//   // origin: "*",
+//   credentials: true, // Allow cookies (useful for authentication)
+//   methods: ["GET", "POST", "PUT", "DELETE"], // Allowed HTTP methods
+// };
+
 const corsOptions = {
-  origin: allowedOrigins,
-  // origin: "*",
-  credentials: true, // Allow cookies (useful for authentication)
-  methods: ["GET", "POST", "PUT", "DELETE"], // Allowed HTTP methods
+  origin: function (origin, callback) {
+    // Allow requests with no origin (like mobile apps or curl)
+    if (!origin) return callback(null, true);
+
+    if (allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error("Not allowed by CORS"));
+    }
+  },
+  credentials: true,
+  methods: ["GET", "POST", "PUT", "DELETE"],
 };
 
 app.use(cors(corsOptions));
