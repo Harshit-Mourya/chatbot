@@ -6,7 +6,11 @@ dotenv.config({ path: "../.env" });
 const app = express();
 
 // Define allowed origins
-const allowedOrigins = ["http://localhost:5173", "https://hoppscotch.io"];
+const allowedOrigins = [
+  "https://aichatbot03.netlify.app/",
+  "http://localhost:5173",
+  "https://hoppscotch.io",
+];
 
 const corsOptions = {
   origin: allowedOrigins,
