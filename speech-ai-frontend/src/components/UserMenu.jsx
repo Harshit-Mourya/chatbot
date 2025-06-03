@@ -27,7 +27,7 @@ const UserMenu = () => {
     );
     if (!confirmClear) return;
 
-    console.log(isLoggedIn);
+    // console.log(isLoggedIn);
 
     if (isLoggedIn) {
       try {

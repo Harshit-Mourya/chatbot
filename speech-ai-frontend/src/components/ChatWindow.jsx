@@ -15,9 +15,11 @@ const ChatWindow = () => {
   }, [messages]);
 
   useEffect(() => {
+    if (isAuthLoading) return;
+
     const fetchChats = async () => {
       const token = localStorage.getItem("chatBotToken");
-      console.log("token : ", token);
+      // console.log("token : ", token);
       // const user = JSON.parse(localStorage.getItem("chatBotUser"));
       // setUserName(user?.name || "");
       // console.log("user : ", userName);
@@ -31,27 +33,35 @@ const ChatWindow = () => {
             },
           });
 
-          console.log(res);
-
+          // console.log(res);
+          if (!res.ok) {
+            throw new Error(`Server error: ${res.status}`);
+          }
           const data = await res.json();
 
-          console.log("data: ", data);
+          // console.log("data: ", data);
 
           setMessages(data); // Set messages from DB
         } catch (err) {
+          alert(err);
           console.error("Error loading chats from server:", err);
         }
       } else {
         // Guest: load from localStorage
-        const guestChats = JSON.parse(
-          localStorage.getItem("chatMessages") || "[]"
-        );
-        setMessages(guestChats); // Set guest messages
+        try {
+          const guestChats = JSON.parse(
+            localStorage.getItem("chatMessages") || "[]"
+          );
+          setMessages(guestChats);
+        } catch (e) {
+          console.error("Failed to load guest messages:", e);
+          setMessages([]);
+        }
       }
     };
 
     fetchChats();
-  }, [setMessages]);
+  }, [isAuthLoading, setMessages]);
 
   return (
     <div className="chat-window">

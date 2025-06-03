@@ -14,8 +14,8 @@ router.post("/", optionalAuth, async (req, res) => {
   const { message } = req.body; // Get message from request body
   const userId = req.user?.id; // only set if logged in
 
-  console.log(message);
-  console.log("userid: ", userId);
+  // console.log(message);
+  // console.log("userid: ", userId);
   if (!message) {
     return res.status(400).json({ error: "Message is required!" });
   }
