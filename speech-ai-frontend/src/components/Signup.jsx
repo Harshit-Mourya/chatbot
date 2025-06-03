@@ -19,6 +19,8 @@ export default function Signup() {
     setSignupError("");
 
     try {
+      setIsAuthLoading(true);
+
       const res = await axios.post(`${BASE_URL}/auth/signup`, {
         name,
         email,
@@ -27,13 +29,17 @@ export default function Signup() {
 
       // Save token from backend response
       localStorage.setItem("chatBotToken", res.data.token);
+      localStorage.removeItem("chatMessages");
       login(res.data.user, res.data.token);
+
+      setIsAuthLoading(false);
 
       // Redirect user after successful signup
       navigate("/");
     } catch (err) {
       setSignupError(err.response?.data?.error || "Signup failed! Try again.");
       console.error("Signup error:", err);
+      setIsAuthLoading(false);
     }
   };
 

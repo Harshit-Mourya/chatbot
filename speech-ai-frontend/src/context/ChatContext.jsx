@@ -65,7 +65,7 @@ export const ChatProvider = ({ children }) => {
     };
 
     loadMessages();
-  }, [isAuthLoading]);
+  }, [isAuthLoading, isLoggedIn]);
 
   //  Auto-scroll chat to the latest message
   useEffect(() => {
