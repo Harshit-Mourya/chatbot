@@ -28,8 +28,8 @@ export default function Login() {
       // localStorage.setItem("chatBotUser", JSON.stringify(res.data.user));
 
       login(res.data.user, res.data.token);
-      setIsAuthLoading(false);
       navigate("/"); // Redirect to chatbot
+      setIsAuthLoading(false);
     } catch (err) {
       if (!err.response) {
         alert("Network error. Please check your connection.");
