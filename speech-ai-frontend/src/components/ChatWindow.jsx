@@ -4,6 +4,8 @@ import { useChat } from "../context/ChatContext";
 import { useAuth } from "../context/AuthContext";
 import "./ChatWindow.css";
 
+const BASE_URL = import.meta.env.VITE_API_BASE_URL;
+
 const ChatWindow = () => {
   const { messages, setMessages } = useChat();
   // const [userName, setUserName] = useState("");
@@ -27,7 +29,7 @@ const ChatWindow = () => {
       if (token) {
         // Logged-in: fetch from DB
         try {
-          const res = await fetch("http://localhost:5000/api/chat/history", {
+          const res = await fetch(`${BASE_URL}/chat/history`, {
             headers: {
               Authorization: `Bearer ${token}`,
             },

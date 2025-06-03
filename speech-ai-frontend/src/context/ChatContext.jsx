@@ -9,6 +9,8 @@ import axios from "axios";
 
 import { useAuth } from "./AuthContext";
 
+const BASE_URL = import.meta.env.VITE_API_BASE_URL;
+
 const ChatContext = createContext();
 
 export const ChatProvider = ({ children }) => {
@@ -63,7 +65,7 @@ export const ChatProvider = ({ children }) => {
       const token = localStorage.getItem("chatBotToken");
 
       const res = await axios.post(
-        "http://localhost:5000/api/chat",
+        `${BASE_URL}/chat`,
         {
           message: text, // Send transcribed speech as message
         },

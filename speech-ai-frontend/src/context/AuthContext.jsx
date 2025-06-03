@@ -2,6 +2,8 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
 import axios from "axios";
 
+const BASE_URL = import.meta.env.VITE_API_BASE_URL;
+
 const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
@@ -13,7 +15,7 @@ export const AuthProvider = ({ children }) => {
     const token = localStorage.getItem("chatBotToken");
     if (token) {
       axios
-        .get("http://localhost:5000/api/auth/me", {
+        .get(`${BASE_URL}/auth/me`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },

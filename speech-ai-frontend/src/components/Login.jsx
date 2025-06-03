@@ -5,6 +5,8 @@ import { useAuth } from "../context/AuthContext";
 import "./LoginSignup.css";
 import BackButton from "./BackButton";
 
+const BASE_URL = import.meta.env.VITE_API_BASE_URL;
+
 export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -16,7 +18,7 @@ export default function Login() {
     e.preventDefault();
 
     try {
-      const res = await axios.post("http://localhost:5000/api/auth/login", {
+      const res = await axios.post(`${BASE_URL}/auth/login`, {
         email,
         password,
       });

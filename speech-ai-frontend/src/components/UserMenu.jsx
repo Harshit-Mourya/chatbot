@@ -5,6 +5,8 @@ import { useNavigate } from "react-router-dom";
 import "./UserMenu.css";
 import axios from "axios";
 
+const BASE_URL = import.meta.env.VITE_API_BASE_URL;
+
 const UserMenu = () => {
   const { isLoggedIn, user, logout } = useAuth();
   const { setMessages } = useChat();
@@ -33,7 +35,7 @@ const UserMenu = () => {
       try {
         console.log("trying to clear chat...");
 
-        await axios.delete("http://localhost:5000/api/chat/clear", {
+        await axios.delete(`${BASE_URL}/chat/clear`, {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("chatBotToken")}`,
           },
