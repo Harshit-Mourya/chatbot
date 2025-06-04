@@ -19,8 +19,8 @@ const SpeechButton = ({ setUserInput }) => {
   }, [transcription, setUserInput]);
 
   const clearTranscription = () => {
-    setTranscription(""); // ✅ Clear transcription manually
-    setUserInput(""); // ✅ Clear input box
+    setTranscription(""); // Clear transcription manually
+    setUserInput(""); // Clear input box
   };
 
   // Function to start or stop listening
