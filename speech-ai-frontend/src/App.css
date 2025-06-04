@@ -17,3 +17,16 @@
   text-align: center;
   padding: 20px 0;
 }
+
+.chatBotLogo {
+  width: 2.7rem;
+  height: 2.7rem;
+  margin-right: 10px;
+  border-radius: 50%;
+}
+
+.heading-box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

@@ -38,13 +38,16 @@ export default function ChatBot() {
 
   return (
     <div className="ChatBot">
-      <h1 className="Heading">AI Chatbot</h1>
-      {showSessionExpired && (
-        <SessionExpiredPopup
-          onLogin={handleLogin}
-          onContinue={handleContinue}
-        />
-      )}
+      <div className="heading-box">
+        <img src=".././ChatBotIcon.jpg" alt="Logo" className="chatBotLogo" />
+        <h1 className="Heading">AI Chatbot</h1>
+        {showSessionExpired && (
+          <SessionExpiredPopup
+            onLogin={handleLogin}
+            onContinue={handleContinue}
+          />
+        )}
+      </div>
 
       {/* <SessionExpiredPopup onLogin={handleLogin} onContinue={handleContinue} /> */}
 
