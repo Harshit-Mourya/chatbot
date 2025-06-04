@@ -13,10 +13,10 @@ const SpeechButton = ({ setUserInput }) => {
   } = speechToText();
 
   useEffect(() => {
-    if (transcription) {
+    if (isRecording && transcription) {
       setUserInput(transcription);
     }
-  }, [transcription, setUserInput]);
+  }, [transcription, setUserInput, isRecording]);
 
   const clearTranscription = () => {
     setTranscription(""); // Clear transcription manually

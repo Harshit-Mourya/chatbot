@@ -15,6 +15,8 @@ export const SpeechToTextProvider = ({ children }) => {
       // console.log("Transcription : ", transcription);
       // sendToCohere(transcription);
       sendToAI(transcription);
+      setTranscription("");
+
       recognitionInstance.stop();
       console.log("Stopped listening.");
       setRecognitionInstance(null);
