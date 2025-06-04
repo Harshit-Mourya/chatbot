@@ -40,14 +40,23 @@
   color: white;
   border: none;
   border-radius: 50%; /* Circular shape */
-  width: 48px;
-  height: 48px;
+  width: 3rem;
+  height: 3rem;
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: 24px; /* Icon size */
   cursor: pointer;
   transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+@media (max-width: 430px) {
+  .read-aloud-button,
+  .send-button {
+    width: 2.5rem;
+    height: 2.5rem;
+    font-size: 18px; /* Icon size */
+  }
 }
 
 button i {

@@ -4,8 +4,8 @@
   color: white;
   border: none;
   border-radius: 50%; /* Circular button */
-  width: 48px;
-  height: 48px;
+  width: 3rem;
+  height: 3rem;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -32,4 +32,12 @@
 
 button i {
   background: transparent;
+}
+
+@media (max-width: 430px) {
+  .speech-button {
+    width: 2.5rem;
+    height: 2.5rem;
+    font-size: 18px; /* Icon size */
+  }
 }
