@@ -86,3 +86,15 @@
   border-bottom-right-radius: 18px;
   border-top-right-radius: 18px;
 }
+
+.typing-indicator {
+  font-style: italic;
+  color: #aaa;
+  padding: 8px 12px;
+  display: flex;
+  align-items: center;
+}
+.fa-robot {
+  background: transparent;
+  margin-right: 10px;
+}
