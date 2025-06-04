@@ -4,32 +4,32 @@ import axios from "axios";
 import { useAuth } from "../context/AuthContext";
 import "./LoginSignup.css";
 import BackButton from "./BackButton";
+import Loader from "./Loader";
 
 const BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
 export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const navigate = useNavigate();
-  const { login, setIsAuthLoading } = useAuth();
   const [loginError, setLoginError] = useState("");
+  const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
+  const { login } = useAuth();
 
   const handleLogin = async (e) => {
     e.preventDefault();
-
+    setLoginError("");
+    setLoading(true);
     try {
-      setIsAuthLoading(true);
       const res = await axios.post(`${BASE_URL}/auth/login`, {
         email,
         password,
       });
 
-      // localStorage.setItem("chatBotToken", res.data.token);
-      // localStorage.setItem("chatBotUser", JSON.stringify(res.data.user));
+      console.log("Login success:", res.data);
 
       login(res.data.user, res.data.token);
       navigate("/"); // Redirect to chatbot
-      setIsAuthLoading(false);
     } catch (err) {
       if (!err.response) {
         alert("Network error. Please check your connection.");
@@ -37,13 +37,15 @@ export default function Login() {
         const msg =
           err.response?.data?.error || "Login failed. Please try again.";
         setLoginError(msg);
-        setIsAuthLoading(false);
 
         console.error(err);
       }
-      setIsAuthLoading(false);
+    } finally {
+      setLoading(false);
     }
   };
+
+  if (loading) return <Loader />;
 
   return (
     <div className="login-container">
@@ -72,6 +74,9 @@ export default function Login() {
         <button type="submit" className="login-button">
           Login
         </button>
+        {/* <button onClick={() => setLoginError("Testing error...")}>
+          Test Error
+        </button> */}
       </form>
     </div>
   );

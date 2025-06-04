@@ -21,6 +21,7 @@ export const AuthProvider = ({ children }) => {
           },
         })
         .then((res) => {
+          console.log(res.data.user);
           setUser(res.data.user);
           setIsLoggedIn(true);
         })

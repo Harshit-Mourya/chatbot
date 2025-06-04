@@ -4,13 +4,15 @@ import { useChat } from "../context/ChatContext";
 import { useNavigate } from "react-router-dom";
 import "./UserMenu.css";
 import axios from "axios";
+import Loader from "./Loader";
+import { use } from "react";
 
 const BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
 const UserMenu = () => {
   const { isLoggedIn, user, logout } = useAuth();
   const { setMessages } = useChat();
-
+  const [loading, setLoading] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const navigate = useNavigate();
   const menuRef = useRef();
@@ -18,9 +20,16 @@ const UserMenu = () => {
   const toggleDropdown = () => setDropdownOpen(!dropdownOpen);
 
   const handleLogout = () => {
-    logout();
+    setLoading(true);
+
     setDropdownOpen(false);
-    navigate("/");
+
+    setTimeout(() => {
+      logout();
+
+      setLoading(false);
+      navigate("/");
+    }, 2000);
   };
 
   const handleClearChat = async () => {
@@ -66,6 +75,8 @@ const UserMenu = () => {
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
+
+  if (loading) return <Loader />;
 
   return (
     <div className="user-menu" ref={menuRef}>
